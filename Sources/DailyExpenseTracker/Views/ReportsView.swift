@@ -27,13 +27,11 @@ struct ReportsView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
-                // Header
                 VStack(spacing: 12) {
                     Text("Monthly Report")
                         .font(.system(size: 28, weight: .bold))
                         .foregroundColor(.primary)
                     
-                    // Month Navigation
                     HStack {
                         Button(action: viewModel.goToPreviousMonth) {
                             Image(systemName: "chevron.left")
@@ -69,7 +67,6 @@ struct ReportsView: View {
                 
                 ScrollView {
                     VStack(spacing: 16) {
-                        // Total Spending Card
                         VStack(spacing: 8) {
                             Text("Total Spending")
                                 .font(.callout)
@@ -88,7 +85,6 @@ struct ReportsView: View {
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(12)
                         
-                        // Spending Status
                         HStack {
                             Text(viewModel.getSpendingStatus())
                                 .font(.system(size: 20, weight: .semibold))
@@ -104,7 +100,6 @@ struct ReportsView: View {
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(12)
                         
-                        // Category Breakdown
                         VStack(alignment: .leading, spacing: 12) {
                             Text("By Category")
                                 .font(.callout)
@@ -139,7 +134,6 @@ struct ReportsView: View {
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(12)
                         
-                        // Top 3 Categories Insights
                         if !viewModel.topCategories.isEmpty {
                             VStack(alignment: .leading, spacing: 12) {
                                 Text("Insights")
@@ -148,7 +142,6 @@ struct ReportsView: View {
                                     .foregroundColor(.primary)
                                 
                                 VStack(alignment: .leading, spacing: 8) {
-                                    // Most spent
                                     if let topCategory = viewModel.getMostSpentCategory() {
                                         HStack(spacing: 8) {
                                             Text(topCategory.emoji)
@@ -160,7 +153,7 @@ struct ReportsView: View {
                                             
                                             Spacer()
                                             
-                                            Text("₹\(String(format: \"%.2f\", viewModel.getMostSpentAmount()))")
+                                            Text("₹\(String(format: "%.2f", viewModel.getMostSpentAmount()))")
                                                 .font(.callout)
                                                 .fontWeight(.semibold)
                                                 .foregroundColor(ColorHelper.hex(topCategory.color))
@@ -170,7 +163,6 @@ struct ReportsView: View {
                                         .cornerRadius(10)
                                     }
                                     
-                                    // Try reducing top spending category
                                     if let topCategory = viewModel.getMostSpentCategory() {
                                         HStack(spacing: 8) {
                                             Image(systemName: "lightbulb")
@@ -188,7 +180,6 @@ struct ReportsView: View {
                                         .cornerRadius(10)
                                     }
                                     
-                                    // Good control insight
                                     HStack(spacing: 8) {
                                         Image(systemName: "checkmark.circle")
                                             .font(.system(size: 16))
@@ -255,7 +246,6 @@ struct CategoryBarRow: View {
                 }
             }
             
-            // Progress bar
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
                     Capsule()
@@ -269,9 +259,4 @@ struct CategoryBarRow: View {
             .frame(height: 6)
         }
     }
-}
-
-@available(iOS 17.0, *)
-#Preview {
-    ReportsView()
 }
